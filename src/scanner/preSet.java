@@ -9,6 +9,17 @@ public class preSet {
 		ENDFILE,ERROR,IF,THEN,ELSE,END,REPEAT,UNTIL,READ,WRITE,ID,NUM,
 		ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPAREN,RPAREN,SEMI
 	}
-	public static int lineNum;
+	public static enum stmtKind{
+		IfK,RepeatK,AssignK,ReadK,WriteK
+	}
+	public static enum expKind{
+		OpK,ConstK,IdK
+	}
+	public static enum nodeKind{
+		StmtK,ExpK
+	}
+	public static int lineNum=0;
+	
+	public static String returnString;
 	
 }

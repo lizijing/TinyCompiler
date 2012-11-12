@@ -13,7 +13,7 @@ public class TinyScanner {
 	static int bufferPos=0;
 	static boolean ifFirst=true;
 	//static StringTokenizer tokenizer;
-	static char lineBuf[] = new char [10];
+	static char lineBuf[] = new char [260];
 	static int linePos=0;
 	static BufferedReader br ;
 	static int bufSize=10;
@@ -89,6 +89,70 @@ public class TinyScanner {
 			return true;
 		else
 			return false;
+			
+	}
+	
+	public TokenType reservedLookup(String s)
+	{   
+		
+		//System.out.println((int)s.charAt(4));
+		int j=0;
+		for(int i=0;i<s.length();i++)
+		{
+			if((int)s.charAt(i)==0)
+				{j=i;
+				
+				break;
+				}
+			
+			
+				
+		}
+		
+		s=s.substring(0, j);
+		TokenType tok;
+		if(s.equals("if"))
+		{
+			tok = TokenType.IF;
+			return tok;
+		}
+		else if(s.equals("then"))
+		{
+			tok = TokenType.THEN;
+			return tok;
+		}
+		else if(s.equals("else"))
+		{
+			tok = TokenType.ELSE;
+			return tok;
+		}
+		else if(s.equals("end"))
+		{   //System.out.println("zijing");
+			tok = TokenType.END;
+			return tok;
+		}
+		else if(s.equals("repeat"))
+		{
+			tok = TokenType.REPEAT;
+			return tok;
+		}
+		else if(s.equals("until"))
+		{
+			tok = TokenType.UNTIL;
+			return tok;
+		}
+		else if(s.equals("read"))
+		{  
+			tok = TokenType.READ;
+			return tok;
+		}
+		else if(s.equals("write"))
+		{
+			tok = TokenType.WRITE;
+			return tok;
+		}
+		else
+			{  return TokenType.ID;}
 			
 	}
 	public TokenType getToken() throws Exception
@@ -242,7 +306,11 @@ public class TinyScanner {
 			{   
 				
 				tokenString[tokenStringIndex]='\0';
-				System.out.println(tokenString);
+				if(type.equals(TokenType.ID))
+					{type = reservedLookup(String.valueOf(tokenString));}
+				preSet.returnString = String.valueOf(tokenString);
+				System.out.println(preSet.returnString);
+				//System.out.println(tokenString);
 				
 			}
 			//return type;
